@@ -1,0 +1,26 @@
+td {
+    border: solid #000 1px;
+    padding: 5px;
+}
+
+#container {
+    box-shadow: 0 0 20px gray;
+    background-color: white;
+    width: 1080px;
+    height: 1200px;
+    margin: 0 auto;
+}
+
+#Lewy {
+    display: flex;
+    float: left;
+    width: 25%;
+    margin: 0 auto;
+    left: 0%;
+}
+
+#Prawy {
+    float: left;
+    width: 75%;
+    right: 0%;
+}
