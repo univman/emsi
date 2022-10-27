@@ -10,8 +10,6 @@
 <body>
     <p>
         <?php
-            // $conn = new mysqli("localhost", "root", "", "db_emsi") or die("Błąd połączenia");
-
             $result = $conn->query("SELECT * FROM contractors");
 
             if($result->num_rows > 0) {
@@ -19,14 +17,14 @@
                 echo "<table>";
 
                 echo "<tr>";
-                echo "<th>Numer NIP:</th>";
-                echo "<th>Numer REGON:</th>";
-                echo "<th>Nazwa:</th>";
-                echo "<th>Data utworzenia:</th>";
-                echo "<th>Ulica:</th>";
-                echo "<th>Numer budynku:</th>";
-                echo "<th>Numer lokalu:</th>";
-                echo "<th>Uwagi:</th>";
+                echo "<th>Numer NIP</th>";
+                echo "<th>Numer REGON</th>";
+                echo "<th>Nazwa</th>";
+                echo "<th>Data utworzenia</th>";
+                echo "<th>Ulica</th>";
+                echo "<th>Numer budynku</th>";
+                echo "<th>Numer lokalu</th>";
+                echo "<th>Uwagi</th>";
                 echo "</tr>";
 
                 while($row = $result->fetch_assoc()) {
@@ -49,8 +47,6 @@
                 echo "Pusta baza danych";
 
             }
-
-            $conn->close();
         ?>
     </p>
 </body>

@@ -55,8 +55,6 @@
                 echo "Pusta baza danych";
 
             }
-
-            $conn->close();
         ?>
 
         <form action="" method="post">

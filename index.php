@@ -11,12 +11,13 @@
     <div id="container">
         <?php
             $conn = new mysqli("localhost", "root", "", "db_emsi") or die("Błąd połączenia");
-            
+
             $config['path']['webs'] = './webs/';
             $config['file']['ext'] = '.php';
             
             $menu['other'] = 'Różne kontrolki HTML';
             $menu['employees'] = 'Tabela Pracowników';
+            $menu['vat'] = 'Tabela Faktur VAT';
 
             echo "<div id = 'Lewy'>";
                 echo '<ul>';
@@ -38,6 +39,8 @@
                     include($config['path']['webs'].'404'.$config['file']['ext']);
                 }
             echo "</div>";
+
+            $conn->close();
         ?>
     </div>
 </body>
