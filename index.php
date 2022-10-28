@@ -18,6 +18,10 @@
             $menu['other'] = 'Różne kontrolki HTML';
             $menu['employees'] = 'Tabela Pracowników';
             $menu['vat'] = 'Tabela Faktur VAT';
+            $menu['delegations'] = ' Tabela Delegacji BD';
+            $menu['contractors'] = 'Dane Kontrahentów';
+            $menu['add_contractor'] = 'Dodaj Kontrahenta';
+            $menu['edit_contractor'] = 'asd';
 
             echo "<div id = 'Lewy'>";
                 echo '<ul>';
