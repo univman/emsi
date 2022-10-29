@@ -9,6 +9,8 @@
 </head>
 <body>
     <div id="container">
+
+    <div id = 'title'>Zadanie zdalne e-MSI</div>
         <?php
             $conn = new mysqli("localhost", "root", "", "db_emsi") or die("Błąd połączenia");
 
