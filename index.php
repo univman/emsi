@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>Zadanie zdalne e-MSI</title>
 </head>
 <body>
@@ -19,9 +19,7 @@
             $menu['employees'] = 'Tabela Pracowników';
             $menu['vat'] = 'Tabela Faktur VAT';
             $menu['delegations'] = ' Tabela Delegacji BD';
-            $menu['contractors'] = 'Dane Kontrahentów';
-            $menu['add_contractor'] = 'Dodaj Kontrahenta';
-            $menu['edit_contractor'] = 'asd';
+            $menu['contractor_form'] = 'Dane Kontrahentów';
 
             echo "<div id = 'Lewy'>";
                 echo '<ul>';

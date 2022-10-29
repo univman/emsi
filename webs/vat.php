@@ -8,54 +8,49 @@
 </head>
 <body>
     <p>
+        <table class="blueTable">
+            <thead>
+                <th>Lp.</th>
+                <th>Opis</th>
+                <th>MPK</th>
+                <th>Kwota Netto</th>
+                <th>Ilość</th>
+                <th>VAT</th>
+                <th>Kwota Brutto</th>
+                <th>Wartość Netto</th>
+                <th>Wartość Brutto</th>
+            </thead>
         <?php
             $result = $conn->query("SELECT * FROM vat");
 
             if($result->num_rows > 0) {
 
-                echo "<table>";
-                echo "<tr>";
-                echo "<th>Lp.</th>";
-                echo "<th>Opis</th>";
-                echo "<th>MPK</th>";
-                echo "<th>Kwota Netto</th>";
-                echo "<th>Ilość</th>";
-                echo "<th>VAT</th>";
-                echo "<th>Kwota Brutto</th>";
-                echo "<th>Wartość Netto</th>";
-                echo "<th>Wartość Brutto</th>";
-                echo "</tr>";
-
                 while($row = $result->fetch_assoc()) {
-                    $options = array('0', '8', '23');
+                    $options = array('0', '3', '8', '23');
                     $row_id = intval($row["ID"]);
                     $selected = $row["VAT"];
                     
-                    // print_r($explo);
-                    
-                    if(isset($_POST['vat_value'])) {
+
+                    if(isset($_POST['vat_value']) && $row_id == $_POST['vat_value'][0]) {
+
                         $explo = array_map('intval', explode(',', $_POST['vat_value']));
-                        if($explo[1] == $row_id) {
-                            $selected = $explo[0];
+                        if($explo[0] == $row_id) {
+                            $selected = $explo[1];
+                            $conn->query("update `vat` set vat = '$selected' WHERE id = '$explo[0]';");
                         } else {
                             $selected = intval($row["VAT"]);
                         }
 
-                        echo var_dump($selected);
-
-                        // echo "Linijka" . $row_id . "</br>";
-                        // echo "Wartość:" . $explo[0] . " ";
-                        // echo "Row:" . $explo[1] . "</br> </br>";
-                        $conn->query("UPDATE `vat` SET `VAT` = '$selected' WHERE `vat`.`ID` = '$explo[1]';");
                     }
+
                     $gross_amount = $row["NET_AMOUNT"] * $selected * 0.01 + $row["NET_AMOUNT"];
-                    
                     
                     if(1000 < $row["NET_AMOUNT"] && isset($_POST['change_color'])) {
                         echo "<tr style='background-color:#00FF00'>";
                     } else {
                         echo "<tr>";
                     }
+                    
                     echo "<td>" . $row_id . "</td>";
                     echo "<td>" . $row["DESCRIPTION"] . "</td>";
                     echo "<td>" . $row["MPK"] . "</td>";
@@ -63,25 +58,26 @@
                     echo "<td>" . $row["AMOUNT"] . "</td>";
 
                     echo "<td>";
-                    echo "<form action='' method='post' id='formularz'>";
-                    echo "<select name='vat_value' onchange='document.getElementById(\"formularz\").submit()'>";
-                    $temp = $row["ID"];
+                    echo "<form action='' method='post' id='formularz$row_id'>";
+                    echo "<select name='vat_value' onchange='document.getElementById(\"formularz$row_id\").submit()'>";
+                    
                     foreach($options as $option){
         
                         if($selected == $option){
-                            echo "<option selected='selected' value='$option, $temp'>$option %</option>";
+                            echo "<option selected='selected' value='$row_id,$option'>$option %</option>";
                         } 
                         else {
-                            echo "<option value='$option, $temp'>$option %</option>";
+                            echo "<option value='$row_id,$option'>$option %</option>";
                         }
                     }
+
                     echo "</select>";
                     echo "</form>";
                     echo "</td>";
 
                     echo "<td>" . $gross_amount . " PLN</td>";
-                    echo "<td>" . $row["NET_AMOUNT"] * $row["AMOUNT"] . " PLN</td>";
-                    echo "<td>" . $gross_amount * $row["AMOUNT"] . " PLN</td>";
+                    echo "<td>" . round($row["NET_AMOUNT"] * $row["AMOUNT"], 2) . " PLN</td>";
+                    echo "<td>" . round($gross_amount * $row["AMOUNT"], 2) . " PLN</td>";
                     echo "</tr>";
                 }
 
@@ -91,7 +87,7 @@
                 echo "Pusta baza danych";
             }
         ?>
-
+        </br>
         <form action="" method="post">
             <input type="submit" name="change_color" value="Powyżej 1000,00 zł Netto">
         </form>

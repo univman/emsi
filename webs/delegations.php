@@ -7,16 +7,16 @@
 
         if($result->num_rows > 0) {
 
-            echo "<table>";
+            echo "<table class=\"blueTable\">";
 
-            echo "<tr>";
+            echo "<thead>";
             echo "<th>Lp.</th>";
             echo "<th>Imię i Nazwisko</th>";
             echo "<th>Data od</th>";
             echo "<th>Data do</th>";
             echo "<th>Miejsce wyjazdu</th>";
             echo "<th>Miejsce przyjazdu</th>";
-            echo "</tr>";
+            echo "</thead>";
 
             while($row = $result->fetch_assoc()) {
                 

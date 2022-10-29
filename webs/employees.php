@@ -9,8 +9,8 @@
 <body>
     <p>
         <?php
-            $selected_color1 = "#FFFFFF";
-            $selected_color2 = "#b71f1f";
+            $selected_color1 = "#EEEEEE";
+            $selected_color2 = "#D0E4F5";
 
             $result = $conn->query("SELECT * FROM employees");
             
@@ -21,7 +21,9 @@
 
             if($result->num_rows > 0) {
 
-                echo "<table>";
+                echo "<table class=\"blueTable\">";
+
+                echo "<thead>";
 
                 echo "<tr>";
                 echo "<th>Lp.</th>";
@@ -31,6 +33,8 @@
                 echo "<th>Data zatrudnienia</th>";
                 echo "<th>Ilości dni urlopowych</th>";
                 echo "</tr>";
+
+                echo "</thead>";
 
                 while($row = $result->fetch_assoc()) {
                     if($row["ID"] % 2 == 0) {
@@ -56,12 +60,13 @@
             }
         ?>
 
+        </br>
         <form action="" method="post">
             <label for="favcolor">Wybierz kolor tła nieparzystych wierszy:</label>
             <input type="color" name="clr1" value="<?= $selected_color1 ?>"><br><br>
             <label for="favcolor">Wybierz kolor tła parzystych wierszy:</label>
             <input type="color" name="clr2" value="<?= $selected_color2 ?>"><br><br>
-            <input type="submit">
+            <input type="submit" value="Zmień kolor">
         </form>
     </p>
 </body>
